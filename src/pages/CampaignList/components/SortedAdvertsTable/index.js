@@ -13,6 +13,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Skeleton
 } from "@mui/material";
 
 import {
@@ -202,6 +203,20 @@ export const SortedAdvertsTable = ({ rows }) => {
             campaigns.map((row, index) => <Row key={index} row={row} />)}
         </TableBody>
       </Table>
+
+      {rows.length === 0 && (
+        <Box
+          sx={{
+            display: 'flex',
+            gap: '2px',
+            flexDirection: 'column',
+          }}
+        >
+          {[...Array(12)].map((_, i) => (
+            <Skeleton key={i} variant='rounded' width='100%' height='45px' />
+          ))}
+        </Box>
+      )}
     </CustomizedTableContainer>
   );
 };
