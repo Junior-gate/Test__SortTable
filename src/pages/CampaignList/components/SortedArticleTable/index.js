@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useGetSubjNameMutation } from "../../../../redux/api/articles";
+import { useGetSubjNameQuery } from "../../../../redux/api/articles";
 
 import {
   Box,
@@ -172,22 +172,13 @@ const Row = ({ row }) => {
 };
 
 export const SortedArticleTable = ({ rows }) => {
-  const [
-    getSubjName,
-    {
+  const {
       data: subjNameData,
       isLoading: isGetSubjNameLoading,
       isSuccess: isGetSubjNameSuccess,
-    },
-  ] = useGetSubjNameMutation();
+    } = useGetSubjNameQuery();
 
   const [campaigns, setCampaigns] = useState([]);
-
-  useEffect(() => {
-    const articles = removeArrayDuplicates(rows.map(({ nms }) => nms).flat(1));
-
-    getSubjName({ articles });
-  }, []);
 
   useEffect(() => {
     if (!isGetSubjNameSuccess) return;

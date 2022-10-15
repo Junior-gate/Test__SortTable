@@ -36,7 +36,7 @@ import {
   roundNumber,
 } from "../../../../utils";
 
-import { useGetSubjNameMutation } from "../../../../redux/api/articles";
+import { useGetSubjNameQuery } from "../../../../redux/api/articles";
 
 const CustomizedTableContainer = styled(TableContainer)({
   ".MuiTable-root th, .MuiTable-root td": {
@@ -166,22 +166,13 @@ const Row = ({ row }) => {
 };
 
 export const SortedSubjTable = ({ rows }) => {
-  const [
-    getSubjName,
-    {
+  const {
       data: subjNameData,
       isLoading: isGetSubjNameLoading,
       isSuccess: isGetSubjNameSuccess,
-    },
-  ] = useGetSubjNameMutation();
+    } = useGetSubjNameQuery();
 
   const [campaigns, setCampaigns] = useState([]);
-
-  useEffect(() => {
-    const articles = removeArrayDuplicates(rows.map(({ nms }) => nms).flat(1));
-
-    getSubjName({ articles });
-  }, [rows]);
 
   useEffect(() => {
     if (!isGetSubjNameSuccess) return;
