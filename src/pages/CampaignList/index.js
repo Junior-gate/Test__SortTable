@@ -1,67 +1,60 @@
-import { useEffect, useState } from "react";
-import "./index.scss";
+import React, { useEffect, useState } from 'react'
+import './index.scss'
 
-import { useDispatch, useSelector } from "react-redux";
-import { useGetCountQuery, useGetListQuery } from "../../redux/api/campaigns";
-import { setCount, setList } from "../../redux/slices/Edit/campaign";
+import { useDispatch, useSelector } from 'react-redux'
+import { useGetCountQuery, useGetListQuery } from '../../redux/api/campaigns'
+import { setCount, setList } from '../../redux/slices/Edit/campaign'
 
-import { Backdrop, CircularProgress, ToggleButton } from "@mui/material";
+import { Backdrop, CircularProgress, ToggleButton } from '@mui/material'
 
-import {
-  CustomizedToggleButtonGroup,
-  DataTable,
-  Search,
-} from "../../components";
+import { CustomizedToggleButtonGroup, DataTable, Search } from '../../components'
 
-import {
-  SortedArticleTable,
-  SortedSubjTable,
-  SortedAdvertsTable,
-} from "./components";
+import { SortedArticleTable, SortedSubjTable, SortedAdvertsTable } from './components'
 
-import { getStatusNameById, getTypeNameById } from "./helpers";
+import { getStatusNameById, getTypeNameById } from './helpers'
 
 export const CampaignList = () => {
-  const campaign = useSelector((state) => state.campaign);
-  const dispatch = useDispatch();
+  const campaign = useSelector(state => state.campaign)
+
+  const dispatch = useDispatch()
 
   const {
     data: campaignList,
     isLoading: isGetCampaignListLoading,
     isSuccess: isGetCampaignListSuccess,
-  } = useGetListQuery();
+  } = useGetListQuery()
 
   const {
     data: campaignsCount,
     isLoading: isGetCampaignsCountLoading,
     isSuccess: isGetCampaignsCountSuccess,
-  } = useGetCountQuery();
+  } = useGetCountQuery()
 
   useEffect(() => {
-    if (!isGetCampaignListSuccess) return;
+    if (!isGetCampaignListSuccess) return
 
     dispatch(
       setList(
-        campaignList.map((item) => ({
+        campaignList.map(item => ({
           ...item,
           Type: getTypeNameById(item.Type),
           statusId: getStatusNameById(item.statusId),
         }))
       )
-    );
-  }, [isGetCampaignListSuccess]);
+    )
+  }, [isGetCampaignListSuccess])
 
   useEffect(() => {
-    if (!isGetCampaignsCountSuccess) return;
+    if (!isGetCampaignsCountSuccess) return
 
-    dispatch(setCount(campaignsCount));
-  }, [isGetCampaignsCountSuccess]);
+    dispatch(setCount(campaignsCount))
+  }, [isGetCampaignsCountSuccess])
 
-  const [sort, setSort] = useState(false);
-  const [statusFilter, setStatusFilter] = useState("total");
+  const [sort, setSort] = useState(false)
+  const [statusFilter, setStatusFilter] = useState('total')
 
-  const setSortHandler = (_, sort) => setSort(sort);
-  const setStatusFilterHandler = (_, status) => setStatusFilter(status);
+  const setSortHandler = (_, sort) => setSort(sort)
+  const setStatusFilterHandler = (_, status) => setStatusFilter(status)
 
   return (
     <div className="campaign-list">
@@ -97,18 +90,10 @@ export const CampaignList = () => {
                   exclusive
                   onChange={setStatusFilterHandler}
                 >
-                  <ToggleButton value="total">
-                    Все ({campaign.count.total})
-                  </ToggleButton>
-                  <ToggleButton value="active">
-                    Активные ({campaign.count.active})
-                  </ToggleButton>
-                  <ToggleButton value="pause">
-                    Остановленные ({campaign.count.pause})
-                  </ToggleButton>
-                  <ToggleButton value="archive">
-                    Архив ({campaign.count.archive})
-                  </ToggleButton>
+                  <ToggleButton value="total">Все ({campaign.count.total})</ToggleButton>
+                  <ToggleButton value="active">Активные ({campaign.count.active})</ToggleButton>
+                  <ToggleButton value="pause">Остановленные ({campaign.count.pause})</ToggleButton>
+                  <ToggleButton value="archive">Архив ({campaign.count.archive})</ToggleButton>
                 </CustomizedToggleButtonGroup>
               </div>
             </div>
@@ -119,13 +104,9 @@ export const CampaignList = () => {
           <div className="campaign-list__table">
             {sort ? (
               <div className="campaign-list__table-sorted">
-                {sort === "article" && (
-                  <SortedArticleTable rows={campaign.list} />
-                )}
-                {sort === "subj" && <SortedSubjTable rows={campaign.list} />}
-                {sort === "adverts" && (
-                  <SortedAdvertsTable rows={campaign.list} />
-                )}
+                {sort === 'article' && <SortedArticleTable rows={campaign.list} />}
+                {sort === 'subj' && <SortedSubjTable rows={campaign.list} />}
+                {sort === 'adverts' && <SortedAdvertsTable rows={campaign.list} />}
               </div>
             ) : (
               <DataTable rows={campaign.list} />
@@ -133,10 +114,10 @@ export const CampaignList = () => {
 
             <Backdrop
               sx={{
-                position: "absolute",
-                backgroundColor: "#8c8c8c80",
-                color: "#fff",
-                zIndex: (theme) => theme.zIndex.drawer + 1,
+                position: 'absolute',
+                backgroundColor: '#8c8c8c80',
+                color: '#fff',
+                zIndex: theme => theme.zIndex.drawer + 1,
               }}
               open={false}
             >
@@ -146,5 +127,5 @@ export const CampaignList = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
