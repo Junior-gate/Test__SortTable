@@ -130,7 +130,11 @@ export const CampaignList = () => {
             ) : (
               <>
                 {statusFilter === 'total' && <DataTable rows={campaign.list} />}
-                {statusFilter === 'active' && <DataTable rows={campaign.list.filter(item => item.statusId === "Активна")} />}
+                {<DataTable rows={getFilteredCompaigns(campaign.list, statusFilter)} />}
+                ...
+                getFilteredCompaigns(compaigns, filter) {
+                return compaigns.filter(...)
+                }
                 {statusFilter === 'pause' && <DataTable rows={campaign.list.filter(item => item.statusId === "Приостановлено")} />}
                 {statusFilter === 'archive' && <DataTable rows={campaign.list.filter(item => item.statusId === "Показы завершены")} />}
               </>
