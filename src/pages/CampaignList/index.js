@@ -63,6 +63,22 @@ export const CampaignList = () => {
   const setSortHandler = (_, sort) => setSort(sort);
   const setStatusFilterHandler = (_, status) => setStatusFilter(status);
 
+
+  const getFilteredCompaigns = (list, statusFilter) => {
+    return list.filter(item => {
+      switch (statusFilter) {
+        case "total":
+          return item
+        case "active":
+          return item.statusId === "Активна"
+        case "pause":
+          return item.statusId === "Приостановлено"
+        case "archive":
+          return item.statusId === "Показы завершены"
+      }
+    })
+  }
+
   return (
     <div className="campaign-list">
       <div className="container">
@@ -128,16 +144,7 @@ export const CampaignList = () => {
                 )}
               </div>
             ) : (
-              <>
-                {statusFilter === 'total' && <DataTable rows={campaign.list} />}
-                {<DataTable rows={getFilteredCompaigns(campaign.list, statusFilter)} />}
-                ...
-                getFilteredCompaigns(compaigns, filter) {
-                return compaigns.filter(...)
-                }
-                {statusFilter === 'pause' && <DataTable rows={campaign.list.filter(item => item.statusId === "Приостановлено")} />}
-                {statusFilter === 'archive' && <DataTable rows={campaign.list.filter(item => item.statusId === "Показы завершены")} />}
-              </>
+              <DataTable rows={getFilteredCompaigns(campaign.list, statusFilter)} />
             )}
 
             <Backdrop
