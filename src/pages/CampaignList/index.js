@@ -7,9 +7,17 @@ import { setCount, setList } from '../../redux/slices/Edit/campaign'
 
 import { Backdrop, CircularProgress, ToggleButton } from '@mui/material'
 
-import { CustomizedToggleButtonGroup, DataTable, Search } from '../../components'
+import {
+  CustomizedToggleButtonGroup,
+  DataTable,
+  Search,
+} from '../../components'
 
-import { SortedArticleTable, SortedSubjTable, SortedAdvertsTable } from './components'
+import {
+  SortedArticleTable,
+  SortedSubjTable,
+  SortedAdvertsTable,
+} from './components'
 
 import { getStatusNameById, getTypeNameById } from './helpers'
 
@@ -57,43 +65,51 @@ export const CampaignList = () => {
   const setStatusFilterHandler = (_, status) => setStatusFilter(status)
 
   return (
-    <div className="campaign-list">
-      <div className="container">
-        <div className="campaign-list__inner">
-          <div className="campaign-list__filters">
-            <div className="campaign-list__group">
-              <div className="campaign-list__group-text">Сгруппировать по:</div>
+    <div className='campaign-list'>
+      <div className='container'>
+        <div className='campaign-list__inner'>
+          <div className='campaign-list__filters'>
+            <div className='campaign-list__group'>
+              <div className='campaign-list__group-text'>Сгруппировать по:</div>
 
-              <div className="campaign-list__group-buttons">
+              <div className='campaign-list__group-buttons'>
                 <CustomizedToggleButtonGroup
-                  className="campaign-list__toggle-group"
-                  color="primary"
+                  className='campaign-list__toggle-group'
+                  color='primary'
                   value={sort}
                   exclusive
                   onChange={setSortHandler}
                 >
-                  <ToggleButton value="subj">Предмету</ToggleButton>
-                  <ToggleButton value="article">Артикулу</ToggleButton>
-                  <ToggleButton value="adverts">Виду рекламы</ToggleButton>
+                  <ToggleButton value='subj'>Предмету</ToggleButton>
+                  <ToggleButton value='article'>Артикулу</ToggleButton>
+                  <ToggleButton value='adverts'>Виду рекламы</ToggleButton>
                 </CustomizedToggleButtonGroup>
               </div>
             </div>
 
-            <div className="campaign-list__filter">
-              <div className="campaign-list__filter-text">Показывать:</div>
+            <div className='campaign-list__filter'>
+              <div className='campaign-list__filter-text'>Показывать:</div>
 
-              <div className="campaign-list__filter-buttons">
+              <div className='campaign-list__filter-buttons'>
                 <CustomizedToggleButtonGroup
-                  className="campaign-list__toggle-group"
-                  color="primary"
+                  className='campaign-list__toggle-group'
+                  color='primary'
                   value={statusFilter}
                   exclusive
                   onChange={setStatusFilterHandler}
                 >
-                  <ToggleButton value="total">Все ({campaign.count.total})</ToggleButton>
-                  <ToggleButton value="active">Активные ({campaign.count.active})</ToggleButton>
-                  <ToggleButton value="pause">Остановленные ({campaign.count.pause})</ToggleButton>
-                  <ToggleButton value="archive">Архив ({campaign.count.archive})</ToggleButton>
+                  <ToggleButton value='total'>
+                    Все ({campaign.count.total})
+                  </ToggleButton>
+                  <ToggleButton value='active'>
+                    Активные ({campaign.count.active})
+                  </ToggleButton>
+                  <ToggleButton value='pause'>
+                    Остановленные ({campaign.count.pause})
+                  </ToggleButton>
+                  <ToggleButton value='archive'>
+                    Архив ({campaign.count.archive})
+                  </ToggleButton>
                 </CustomizedToggleButtonGroup>
               </div>
             </div>
@@ -101,12 +117,16 @@ export const CampaignList = () => {
 
           <Search />
 
-          <div className="campaign-list__table">
+          <div className='campaign-list__table'>
             {sort ? (
-              <div className="campaign-list__table-sorted">
-                {sort === 'article' && <SortedArticleTable rows={campaign.list} />}
+              <div className='campaign-list__table-sorted'>
+                {sort === 'article' && (
+                  <SortedArticleTable rows={campaign.list} />
+                )}
                 {sort === 'subj' && <SortedSubjTable rows={campaign.list} />}
-                {sort === 'adverts' && <SortedAdvertsTable rows={campaign.list} />}
+                {sort === 'adverts' && (
+                  <SortedAdvertsTable rows={campaign.list} />
+                )}
               </div>
             ) : (
               <DataTable rows={campaign.list} />
@@ -121,7 +141,7 @@ export const CampaignList = () => {
               }}
               open={false}
             >
-              <CircularProgress color="inherit" />
+              <CircularProgress color='inherit' />
             </Backdrop>
           </div>
         </div>

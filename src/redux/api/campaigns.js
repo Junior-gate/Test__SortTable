@@ -1,26 +1,26 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-import { BASE_API_URL } from "../../const";
+import { BASE_API_URL } from '../../const'
 
-import { getQueryParams } from "../../utils";
+import { getQueryParams } from '../../utils'
 
 export const campaignsApi = createApi({
-  reducerPath: "campaignsApi",
+  reducerPath: 'campaignsApi',
   baseQuery: fetchBaseQuery({ baseUrl: `${BASE_API_URL}/mocks/` }),
-  endpoints: (builder) => ({
+  endpoints: builder => ({
     getList: builder.query({
       query: () => ({
-        url: "list",
+        url: 'list',
         params: getQueryParams(),
       }),
     }),
     getCount: builder.query({
       query: () => ({
-        url: "count",
+        url: 'count',
         params: getQueryParams(),
       }),
     }),
   }),
-});
+})
 
-export const { useGetCountQuery, useGetListQuery } = campaignsApi;
+export const { useGetCountQuery, useGetListQuery } = campaignsApi

@@ -1,1 +1,1 @@
-export const getLocalStorageItem = (itemName) => localStorage.getItem(itemName);
+export const getLocalStorageItem = itemName => localStorage.getItem(itemName)

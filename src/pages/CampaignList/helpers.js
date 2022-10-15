@@ -1,40 +1,40 @@
-import { removeArrayDuplicates } from "../../utils";
+import { removeArrayDuplicates } from '../../utils'
 
-export const getTypeNameById = (type) => {
+export const getTypeNameById = type => {
   switch (type) {
     case 4:
-      return "Каталог";
+      return 'Каталог'
     case 5:
-      return "Карточка товара";
+      return 'Карточка товара'
     case 6:
-      return "Поиск";
+      return 'Поиск'
     case 7:
-      return "Рекомендации";
+      return 'Рекомендации'
     case 9:
-      return "Активна";
+      return 'Активна'
     default:
-      return type;
+      return type
   }
-};
+}
 
-export const getStatusNameById = (type) => {
+export const getStatusNameById = type => {
   switch (type) {
     case 4:
-      return "Готова к запуску";
+      return 'Готова к запуску'
     case 7:
-      return "Показы завершены";
+      return 'Показы завершены'
     case 8:
-      return "Отказался";
+      return 'Отказался'
     case 9:
-      return "Активна";
+      return 'Активна'
     case 11:
-      return "Приостановлено";
+      return 'Приостановлено'
     default:
-      return type;
+      return type
   }
-};
+}
 
-export const getCampaignsStats = (campaigns) => {
+export const getCampaignsStats = campaigns => {
   const stats = {
     Views: 0,
     Clicks: 0,
@@ -43,24 +43,24 @@ export const getCampaignsStats = (campaigns) => {
     spent: 0,
     orders: 0,
     target: 0,
-  };
+  }
 
-  campaigns.forEach((campaign) => {
+  campaigns.forEach(campaign => {
     for (const [key, value] of Object.entries(stats)) {
-      stats[key] = value + (campaign[key] || 0);
+      stats[key] = value + (campaign[key] || 0)
     }
-  });
+  })
 
-  return stats;
-};
+  return stats
+}
 
-export const filteredArticlesBySubjName = (articles) =>
-  removeArrayDuplicates(articles.map(({ subjName }) => subjName));
+export const filteredArticlesBySubjName = articles =>
+  removeArrayDuplicates(articles.map(({ subjName }) => subjName))
 
 export const getArticleSubjName = (article, articles) =>
   articles.reduce((acc, articleItem) => {
     if (articleItem.article === article) {
-      return articleItem.subjName;
+      return articleItem.subjName
     }
-    return acc;
-  }, false);
+    return acc
+  }, false)

@@ -1,7 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  campaignName: "",
+  campaignName: '',
   budget: 0,
   dailyBudget: false,
   status: false,
@@ -14,21 +14,21 @@ const initialState = {
     pause: 0,
     archive: 0,
   },
-};
+}
 
 export const campaign = createSlice({
-  name: "campaign",
+  name: 'campaign',
   initialState,
   reducers: {
     setList: (state, action) => {
-      state.list = action.payload;
+      state.list = action.payload
     },
     setCount: (state, action) => {
-      state.count = action.payload;
+      state.count = action.payload
     },
   },
-});
+})
 
-export const { setList, setCount } = campaign.actions;
+export const { setList, setCount } = campaign.actions
 
-export default campaign.reducer;
+export default campaign.reducer

@@ -1,11 +1,11 @@
-import {styled, ToggleButtonGroup} from "@mui/material";
+import { styled, ToggleButtonGroup } from '@mui/material'
 
 export const CustomizedToggleButtonGroup = styled(ToggleButtonGroup)({
-    "@media (max-width: 768px)": {
-        display: "flex",
+  '@media (max-width: 768px)': {
+    display: 'flex',
 
-        "& > button": {
-            flex: "1 1 100%",
-        },
+    '& > button': {
+      flex: '1 1 100%',
     },
-});
+  },
+})

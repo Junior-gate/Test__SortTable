@@ -1,5 +1,5 @@
-import { SortedAdvertsTable } from "./SortedAdvertsTable";
-import { SortedArticleTable } from "./SortedArticleTable";
-import { SortedSubjTable } from "./SortedSubjsTable";
+import { SortedAdvertsTable } from './SortedAdvertsTable'
+import { SortedArticleTable } from './SortedArticleTable'
+import { SortedSubjTable } from './SortedSubjsTable'
 
-export { SortedArticleTable, SortedSubjTable, SortedAdvertsTable };
+export { SortedArticleTable, SortedSubjTable, SortedAdvertsTable }
