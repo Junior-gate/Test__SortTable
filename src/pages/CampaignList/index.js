@@ -45,7 +45,7 @@ export const CampaignList = () => {
         campaignList.map((item) => ({
           ...item,
           Type: getTypeNameById(item.Type),
-          statusId: getStatusNameById(item.statusId),
+          statusId: item.statusId,
         }))
       )
     );
@@ -64,19 +64,22 @@ export const CampaignList = () => {
   const setStatusFilterHandler = (_, status) => setStatusFilter(status);
 
 
+
   const getFilteredCompaigns = (list, statusFilter) => {
-    return list.filter(item => {
+    const filteredList = list.filter(item => {
       switch (statusFilter) {
         case "total":
           return item
         case "active":
-          return item.statusId === "Активна"
+          return item.statusId === 9
         case "pause":
-          return item.statusId === "Приостановлено"
+          return item.statusId === 11
         case "archive":
-          return item.statusId === "Показы завершены"
+          return item.statusId === 7
       }
     })
+
+    return filteredList.map(item => ({...item, statusId: getStatusNameById(item.statusId)}))
   }
 
   return (
