@@ -25,8 +25,6 @@ export const CampaignList = () => {
   const campaign = useSelector((state) => state.campaign);
   const dispatch = useDispatch();
 
-  console.log(campaign)
-
   const {
     data: campaignList,
     isLoading: isGetCampaignListLoading,
@@ -61,9 +59,6 @@ export const CampaignList = () => {
 
   const [sort, setSort] = useState(false);
   const [statusFilter, setStatusFilter] = useState("total");
-
-  console.log(sort)
-
 
   const setSortHandler = (_, sort) => setSort(sort);
   const setStatusFilterHandler = (_, status) => setStatusFilter(status);
