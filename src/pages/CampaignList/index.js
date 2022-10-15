@@ -25,6 +25,8 @@ export const CampaignList = () => {
   const campaign = useSelector((state) => state.campaign);
   const dispatch = useDispatch();
 
+  console.log(campaign)
+
   const {
     data: campaignList,
     isLoading: isGetCampaignListLoading,
@@ -59,6 +61,9 @@ export const CampaignList = () => {
 
   const [sort, setSort] = useState(false);
   const [statusFilter, setStatusFilter] = useState("total");
+
+  console.log(sort)
+
 
   const setSortHandler = (_, sort) => setSort(sort);
   const setStatusFilterHandler = (_, status) => setStatusFilter(status);
@@ -128,7 +133,12 @@ export const CampaignList = () => {
                 )}
               </div>
             ) : (
-              <DataTable rows={campaign.list} />
+              <>
+                {statusFilter === 'total' && <DataTable rows={campaign.list} />}
+                {statusFilter === 'active' && <DataTable rows={campaign.list.filter(item => item.statusId === "Активна")} />}
+                {statusFilter === 'pause' && <DataTable rows={campaign.list.filter(item => item.statusId === "Приостановлено")} />}
+                {statusFilter === 'archive' && <DataTable rows={campaign.list.filter(item => item.statusId === "Показы завершены")} />}
+              </>
             )}
 
             <Backdrop
