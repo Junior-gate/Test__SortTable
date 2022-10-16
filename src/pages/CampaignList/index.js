@@ -5,7 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useGetCountQuery, useGetListQuery } from "../../redux/api/campaigns";
 import { setCount, setList } from "../../redux/slices/Edit/campaign";
 
-import { Backdrop, CircularProgress, ToggleButton } from "@mui/material";
+import { Backdrop, CircularProgress, ToggleButton,  } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
 
 import {
   CustomizedToggleButtonGroup,
@@ -62,8 +63,6 @@ export const CampaignList = () => {
   const [sort, setSort] = useState(false);
   const [statusFilter, setStatusFilter] = useState("total");
 
-  console.log(sort)
-
 
   const setSortHandler = (_, sort) => setSort(sort);
   const setStatusFilterHandler = (_, status) => setStatusFilter(status);
@@ -102,18 +101,36 @@ export const CampaignList = () => {
                   exclusive
                   onChange={setStatusFilterHandler}
                 >
-                  <ToggleButton value="total">
-                    Все ({campaign.count.total})
-                  </ToggleButton>
-                  <ToggleButton value="active">
-                    Активные ({campaign.count.active})
-                  </ToggleButton>
-                  <ToggleButton value="pause">
-                    Остановленные ({campaign.count.pause})
-                  </ToggleButton>
-                  <ToggleButton value="archive">
-                    Архив ({campaign.count.archive})
-                  </ToggleButton>
+                  {isGetCampaignListLoading ? (
+                    <LoadingButton sx={{height: '48px'}} loading variant="outlined">
+                      Все 
+                    </LoadingButton>
+                  ) : (
+                    <ToggleButton size='medium'  value="total">Все ({campaign.count.total})</ToggleButton>
+                  )}
+
+                  {isGetCampaignListLoading ?
+                    <LoadingButton sx={{height: '48px'}} size='medium' loading variant="outlined">
+                      Активные
+                    </LoadingButton>
+                   : <ToggleButton value="active">Активные ({campaign.count.active}) </ToggleButton>
+                  }
+
+                  {isGetCampaignListLoading ? (
+                    <LoadingButton sx={{height: '48px'}} size='medium' loading variant="outlined">
+                      Остановленные
+                    </LoadingButton>
+                  ) : (
+                    <ToggleButton value="pause">Остановленные ({campaign.count.pause})</ToggleButton>
+                  )}
+
+                  {isGetCampaignListLoading ? (
+                    <LoadingButton sx={{height: '48px'}} size='medium' loading variant="outlined">
+                      Архив
+                    </LoadingButton>
+                  ) : (
+                    <ToggleButton value="archive">Архив ({campaign.count.archive})</ToggleButton>
+                  )}
                 </CustomizedToggleButtonGroup>
               </div>
             </div>
