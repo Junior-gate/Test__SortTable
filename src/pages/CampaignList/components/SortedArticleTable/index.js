@@ -15,7 +15,8 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Skeleton
+  Backdrop,
+  CircularProgress,
 } from "@mui/material";
 
 import {
@@ -237,19 +238,17 @@ export const SortedArticleTable = ({ rows }) => {
         </TableBody>
       </Table>
 
-      {isGetSubjNameLoading && (
-        <Box
-          sx={{
-            display: 'flex',
-            gap: '2px',
-            flexDirection: 'column',
-          }}
-        >
-          {[...Array(12)].map((_, i) => (
-            <Skeleton key={i} variant='rounded' width='100%' height='45px' />
-          ))}
-        </Box>
-      )}
+      <Backdrop
+        sx={{
+          position: "absolute",
+          backgroundColor: "#8c8c8c80",
+          color: "#fff",
+          zIndex: (theme) => theme.zIndex.drawer + 1,
+        }}
+        open={isGetSubjNameLoading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </CustomizedTableContainer>
   );
 };

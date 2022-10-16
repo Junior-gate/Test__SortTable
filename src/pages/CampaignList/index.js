@@ -103,7 +103,7 @@ export const CampaignList = () => {
                 >
                   {isGetCampaignListLoading ? (
                     <LoadingButton sx={{height: '48px'}} loading variant="outlined">
-                      Все 
+                      Все
                     </LoadingButton>
                   ) : (
                     <ToggleButton size='medium'  value="total">Все ({campaign.count.total})</ToggleButton>
@@ -165,7 +165,7 @@ export const CampaignList = () => {
                 color: "#fff",
                 zIndex: (theme) => theme.zIndex.drawer + 1,
               }}
-              open={false}
+              open={isGetCampaignsCountLoading}
             >
               <CircularProgress color="inherit" />
             </Backdrop>
