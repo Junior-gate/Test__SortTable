@@ -1,5 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from 'react-redux'
 
 import {
   Box,
@@ -159,6 +160,9 @@ const Row = ({ row }) => {
 
 export const SortedAdvertsTable = ({ rows }) => {
   const [campaigns, setCampaigns] = useState([]);
+  const { text } = useSelector(state => state.search)
+
+  console.log(campaigns.filter(el => el.advertType.toString().includes(text)))
 
   useEffect(() => {
     const advertsType = removeArrayDuplicates(
@@ -201,7 +205,7 @@ export const SortedAdvertsTable = ({ rows }) => {
         </TableHead>
         <TableBody>
           {campaigns &&
-            campaigns.map((row, index) => <Row key={index} row={row} />)}
+            campaigns.filter(el => el.advertType.toString().toLowerCase().includes(text.toLowerCase())).map((row, index) => <Row key={index} row={row} />)}
         </TableBody>
       </Table>
 

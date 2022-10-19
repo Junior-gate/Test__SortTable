@@ -1,5 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from 'react-redux'
 
 import {
   Box,
@@ -174,7 +175,11 @@ export const SortedSubjTable = ({ rows }) => {
       isSuccess: isGetSubjNameSuccess,
     } = useGetSubjNameQuery();
 
+  const { text } = useSelector((state) => state.search);
+
   const [campaigns, setCampaigns] = useState([]);
+
+  console.log(campaigns.filter(item => item.subjName.includes(text)))
 
   useEffect(() => {
     if (!isGetSubjNameSuccess) return;
@@ -238,7 +243,7 @@ export const SortedSubjTable = ({ rows }) => {
         </TableHead>
         <TableBody>
           {campaigns &&
-            campaigns.map((row, index) => <Row key={index} row={row} />)}
+            campaigns.filter(item => item.subjName.toLowerCase().includes(text.toLowerCase())).map((row, index) => <Row key={index} row={row} />)}
         </TableBody>
       </Table>
 
