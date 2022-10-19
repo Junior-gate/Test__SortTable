@@ -18,6 +18,8 @@ import {
   CircularProgress,
 } from "@mui/material";
 
+import { DataTable } from '../../../../components/DataTable'
+
 import {
   KeyboardArrowDown as KeyboardArrowDownIcon,
   KeyboardArrowUp as KeyboardArrowUpIcon,
@@ -52,7 +54,7 @@ const CustomizedTableContainer = styled(TableContainer)({
 
 const Row = ({ row }) => {
   const navigate = useNavigate();
-
+console.log(row)
   const [open, setOpen] = useState(false);
   return (
     <Fragment>
@@ -88,7 +90,7 @@ const Row = ({ row }) => {
         <TableCell style={{ padding: 0 }} colSpan={11}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box>
-              <Table size="small">
+            {/* <Table size="small">
                 <TableHead>
                   <TableRow>
                     <TableCell>Артикулов</TableCell>
@@ -159,7 +161,9 @@ const Row = ({ row }) => {
                     </TableRow>
                   ))}
                 </TableBody>
-              </Table>
+              </Table> */}
+
+              <DataTable rows={row.campaigns}/>
             </Box>
           </Collapse>
         </TableCell>
