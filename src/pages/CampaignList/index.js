@@ -23,8 +23,9 @@ import {
 import { getStatusNameById, getTypeNameById } from "./helpers";
 
 export const CampaignList = () => {
-  const campaign = useSelector((state) => state.campaign);
   const dispatch = useDispatch();
+  
+  const campaign = useSelector((state) => state.campaign);
 
   const {
     data: campaignList,
